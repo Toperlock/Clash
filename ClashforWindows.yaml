@@ -148,6 +148,8 @@ proxy-groups:
     <<: *a2
   - name: 🌏 全球加速
     <<: *a3
+  - name: 🛍️ 亚马逊
+    <<: *a3
   - name: 🍎 苹果服务
     <<: *a3
   - name: 📺 哔哩哔哩
@@ -223,6 +225,11 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml
     path: ./ruleset/GlobalMedia.yaml
     interval: 86400
+  Amazon:
+    <<: *a6
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Amazon/Amazon.yaml
+    path: ./ruleset/Amazon.yaml
+    interval: 86400
   Apple:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml
@@ -280,6 +287,7 @@ rules:
   - RULE-SET,Download,DIRECT
   - RULE-SET,Ad,🆎 AdBlock
   - RULE-SET,GlobalMedia,🎬 国际媒体
+  - RULE-SET,Amazon,🛍️ 亚马逊
   - RULE-SET,Apple,🍎 苹果服务
   - RULE-SET,Github,🌏 全球加速
   - RULE-SET,Google,🌌 谷歌服务
