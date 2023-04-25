@@ -175,7 +175,7 @@ proxy-groups:
     <<: *a4
     filter: 台|湾|TW|(?i)Taiwan
   - name: 🇺🇲 美国节点
-    <<: *a4
+    <<: *a2
     filter: 美|US|(?i)States|American
   - name: 🇸🇬 狮城节点
     <<: *a4
