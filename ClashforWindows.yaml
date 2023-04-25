@@ -1,11 +1,9 @@
-# @ConfigName        墨鱼自用Clash配置文件
-# @Author            @ddgksf2013
-# @TgChannel         𝐡𝐭𝐭𝐩𝐬://𝐭.𝐦𝐞/𝐝𝐝𝐠𝐤𝐬𝐟𝟐𝟎𝟐𝟏
-# @WechatID          公众号墨鱼手记
-# @Feedback          💡请通过邮件反馈问题[其它方式一概无视]：𝐝𝐝𝐠𝐤𝐬𝐟𝟐𝟎𝟏𝟑@𝟏𝟔𝟑.𝐜𝐨𝐦 💡
-# @UpdateTime        2023/04/20 21:50 UTC/GMT +8
+# @ConfigName        自用Clash配置文件
+# @Author            @ddgksf2013, @可莉
 # @Function          支持手动选择、自动测速、广告屏蔽、兜底分流、按国家分组节点等等   
 # @ClashDownload     https://github.com/Fndroid/clash_for_windows_pkg/releases
+# @githuburl         https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
+# @gitlaburl         https://gitlab.com/lodepuly/vpn_tool/-/tree/main/Tool/Clash/Config
 # @Thanks            @blackmatrix7, @Fndroid, @Anti
 # @Attention         𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
 # @ConfigVersion     1.0.7 
@@ -36,35 +34,19 @@ dns:
   ipv6: true
   listen: 0.0.0.0:53
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - "*.lan"
-    - localhost.ptlogin2.qq.com
-    - +.srv.nintendo.net
-    - +.stun.playstation.net
-    - +.msftconnecttest.com
-    - +.msftncsi.com
-    - +.xboxlive.com
-    - msftconnecttest.com
-    - xbox.*.microsoft.com
-    - "*.battlenet.com.cn"
-    - "*.battlenet.com"
-    - "*.blzstatic.cn"
-    - "*.battle.net"
-  nameserver:
-    - 223.5.5.5
-    - 1.12.12.12
-    - 119.29.29.29
-    - 114.114.114.114
+  default-nameserver:
+     - 119.29.29.29
+
+# 腾讯阿里DoH2
+     - https://1.12.12.12/dns-query
+     - https://223.5.5.5/dns-query
   fallback:
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-    - https://dns.alidns.com/dns-query
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
+# 腾讯DoH2
+     - https://120.53.53.53/dns-query
+
+profile:
+  tracing: true
+
 
 # interval 代表间隔时间，单位为 s；
 # tolerance 代表容差时间，单位为 ms；
@@ -133,7 +115,7 @@ i:
 proxy-providers:
   Subscribe:
     <<: *a1
-    url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的订阅[多链接用|分割]&list=true&udp=false
+    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的订阅[多链接用|分割]&list=true&udp=false
     path: ./proxy_providers/tmp.yaml
     interval: 172800
     health-check:
@@ -162,10 +144,12 @@ proxy-groups:
     <<: *a3
   - name: 🐦 推特服务
     <<: *a3
-  - name: 🤖 OpenAi
+  - name: 🤖 OpenAI
     type: select
     proxies:
       - 🇺🇲 美国节点
+  - name: 🤖 New Bing
+    <<: *a3
   - name: 📺 哔哩哔哩
     type: select
     proxies:
@@ -200,21 +184,6 @@ proxy-groups:
 # 分流规则订阅
 # 默认每二十四小时更新一次分流规则
 rule-providers:
-  Direct:
-    <<: *a5
-    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml
-    path: ./ruleset/Direct.yaml
-    interval: 86400
-  Lan:
-    <<: *a6
-    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml
-    path: ./ruleset/Lan.yaml
-    interval: 86400
-  Download:
-    <<: *a6
-    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml
-    path: ./ruleset/Download.yaml
-    interval: 86400
   Ad:
     <<: *a5
     url: https://anti-ad.net/clash.yaml
@@ -255,10 +224,15 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml
     path: ./ruleset/Twitter.yaml
     interval: 86400
-  OpenAi:
+  OpenAI:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
-    path: ./ruleset/OpenAi.yaml
+    path: ./ruleset/OpenAI.yaml
+    interval: 86400
+  NewBing:
+    <<: *a6
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml
+    path: ./ruleset/Bing.yaml
     interval: 86400
   BiliBili:
     <<: *a6
@@ -270,21 +244,33 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml
     path: ./ruleset/Game.yaml
     interval: 86400
-  ChinaIP:
-    <<: *a7
-    url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml
-    path: ./ruleset/ChinaIP.yaml
-    interval: 86400
   ProxyLite:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ProxyLite/ProxyLite.yaml
     path: ./ruleset/ProxyLite.yaml
     interval: 86400
+  ChinaIP:
+    <<: *a7
+    url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml
+    path: ./ruleset/ChinaIP.yaml
+    interval: 86400
+  Direct:
+    <<: *a5
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml
+    path: ./ruleset/Direct.yaml
+    interval: 86400
+  Lan:
+    <<: *a6
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml
+    path: ./ruleset/Lan.yaml
+    interval: 86400
+  Download:
+    <<: *a6
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml
+    path: ./ruleset/Download.yaml
+    interval: 86400
 rules:
 
-  - RULE-SET,Direct,DIRECT
-  - RULE-SET,Lan,DIRECT
-  - RULE-SET,Download,DIRECT
   - RULE-SET,Ad,🆎 AdBlock
   - RULE-SET,GlobalMedia,🎬 国际媒体
   - RULE-SET,Amazon,🛍️ 亚马逊
@@ -293,9 +279,13 @@ rules:
   - RULE-SET,Google,🌌 谷歌服务
   - RULE-SET,Telegram,📟 电报消息
   - RULE-SET,Twitter,🐦 推特服务
+  - RULE-SET,NewBing,🤖 New Bing
   - RULE-SET,BiliBili,📺 哔哩哔哩
   - RULE-SET,Game,🎮 游戏平台
   - RULE-SET,ProxyLite,🌏 全球加速
   - RULE-SET,ChinaIP,DIRECT
   - GEOIP,CN,DIRECT
+  - RULE-SET,Direct,DIRECT
+  - RULE-SET,Lan,DIRECT
+  - RULE-SET,Download,DIRECT
   - MATCH,🐟 兜底分流
