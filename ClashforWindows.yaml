@@ -34,7 +34,7 @@ dns:
   ipv6: true
   listen: 0.0.0.0:53
   enhanced-mode: fake-ip
-  default-nameserver:
+  nameserver:
      - 119.29.29.29
 
 # 腾讯阿里DoH2
