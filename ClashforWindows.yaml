@@ -12,17 +12,28 @@
 
 port: 7890
 socks-port: 7891
-redir-port: 7892
+#redir-port: 7892
 mixed-port: 7893
 allow-lan: true
+
+# This is only applicable when `allow-lan` is `true`
+# '*': bind all IP addresses
+# 192.168.122.11: bind a single IPv4 address
+# "[aaaa::a8aa:ff:fe09:57d8]": bind a single IPv6 address
 bind-address: "*"
-mode: rule
+# Clash router working mode
+# rule: rule-based packet routing
+# global: all packets will be forwarded to a single endpoint
+# direct: directly forward the packets to the Internet
+mode: Rule
+# Clash by default prints logs to STDOUT
+# info / warning / error / debug / silent
 log-level: info
-ipv6: false
+# RESTful web API listening address
 external-controller: 127.0.0.1:9090
 dns:
   enable: true
-  ipv6: false
+  ipv6: true
   listen: 0.0.0.0:53
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -42,6 +53,7 @@ dns:
     - "*.battle.net"
   nameserver:
     - 223.5.5.5
+    - 1.12.12.12
     - 119.29.29.29
     - 114.114.114.114
   fallback:
@@ -53,6 +65,22 @@ dns:
     geoip-code: CN
     ipcidr:
       - 240.0.0.0/4
+
+# interval 代表间隔时间，单位为 s；
+# tolerance 代表容差时间，单位为 ms；
+# 由于分流规则引用了 GitHub 文件，如果你的本地网络无法访问 GitHub，你将无法让 Clash 正常工作；
+# 你需要先使用翻墙工具让本地网络出墙，再启动 Clash 才能正常下载分流规则并正常启动，待 Clash 启动成功并更新完订阅资源和分流规则之后，方可关闭你之前打开的翻墙工具；
+# 请使用节点订阅转换服务将服务商的订阅链接转换为 Clash 的订阅，并输出为 Node List 格式；
+# 请使用节点订阅转换工具提供的保留节点和过滤节点功能，生成不同地区的订阅链接，并填入下方 proxy-providers 区域；
+# 其他内容具体见注释；
+# 节点订阅转换网址 https://api.dler.io/
+# 如果服务商不支持上面的节点订阅转换，则使用国内的节点订阅转换服务，如 https://id9.cc/
+# URL在线编码工具 https://www.urlencoder.org
+
+# 节点订阅
+# 默认每48小时更新一次节点订阅，每 30分钟 检测一次健康度。
+
+
 #锚点
 pr:
   &a3
@@ -107,7 +135,11 @@ proxy-providers:
     <<: *a1
     url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的订阅[多链接用|分割]&list=true&udp=false
     path: ./proxy_providers/tmp.yaml
-
+    interval: 172800
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 1800
 
 proxies: null
 proxy-groups:
@@ -162,67 +194,85 @@ proxy-groups:
   - name: 🇸🇬 狮城节点
     <<: *a4
     filter: 新|坡|SG|(?i)Singapore
+
+# 分流规则订阅
+# 默认每二十四小时更新一次分流规则
 rule-providers:
   Direct:
     <<: *a5
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml
     path: ./ruleset/Direct.yaml
+    interval: 86400
   Lan:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml
     path: ./ruleset/Lan.yaml
+    interval: 86400
   Download:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml
     path: ./ruleset/Download.yaml
+    interval: 86400
   Ad:
     <<: *a5
     url: https://anti-ad.net/clash.yaml
     path: ./ruleset/anti-ad-clash.yaml
+    interval: 86400
   GlobalMedia:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml
     path: ./ruleset/GlobalMedia.yaml
+    interval: 86400
   Apple:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml
     path: ./ruleset/Apple.yaml
+    interval: 86400
   Github:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml
     path: ./ruleset/Github.yaml
+    interval: 86400
   Google:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml
     path: ./ruleset/Google.yaml
+    interval: 86400
   Telegram:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
     path: ./ruleset/Telegram.yaml
+    interval: 86400
   OpenAi:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
     path: ./ruleset/OpenAi.yaml
+    interval: 86400
   Twitter:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml
     path: ./ruleset/Twitter.yaml
+    interval: 86400
   BiliBili:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml
     path: ./ruleset/BiliBili.yaml
+    interval: 86400
   Game:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml
     path: ./ruleset/Game.yaml
+    interval: 86400
   ChinaIP:
     <<: *a7
     url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml
     path: ./ruleset/ChinaIP.yaml
+    interval: 86400
   ProxyLite:
     <<: *a6
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ProxyLite/ProxyLite.yaml
     path: ./ruleset/ProxyLite.yaml
+    interval: 86400
 rules:
 
   - RULE-SET,Direct,DIRECT
