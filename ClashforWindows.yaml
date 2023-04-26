@@ -1,6 +1,6 @@
 # @ConfigName                自用Clash配置文件
 # @Author                    @ddgksf2013, @可莉
-# @Function                  支持手动选择、自动测速、广告屏蔽、兜底分流、按国家分组节点等等   
+# @Function                  支持手动选择、自动测速、广告屏蔽、兜底分流、按国家分组节点等等(需要开启system proxy才可以分流)
 # @ClashDownload             https://github.com/Fndroid/clash_for_windows_pkg/releases
 # @ddgksf2013 GitHub link    https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
 # @iKeLee Gitlab link        https://gitlab.com/lodepuly/vpn_tool/-/tree/main/Tool/Clash/Config
@@ -36,6 +36,7 @@ dns:
   enhanced-mode: fake-ip
   nameserver:
      - 119.29.29.29
+     - 114.114.114.114
 
 # 腾讯阿里DoH2
      - https://1.12.12.12/dns-query
