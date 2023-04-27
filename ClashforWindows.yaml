@@ -118,7 +118,7 @@ i:
 proxy-providers:
   Subscribe:
     <<: *a1
-    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的订阅[多链接用|分割]&list=true&udp=false
+    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的编码后的订阅[多链接用|分割]&list=true&udp=false
     path: ./proxy_providers/tmp.yaml
     interval: 172800
     health-check:
