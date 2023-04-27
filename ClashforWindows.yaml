@@ -5,7 +5,7 @@
 # @Clash_Chinese_Patch       https://github.com/BoyceLig/Clash_Chinese_Patch/releases
 # @ddgksf2013 GitHub link    https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
 # @iKeLee Gitlab link        https://gitlab.com/lodepuly/vpn_tool/-/tree/main/Tool/Clash/Config
-# @Thanks                    @blackmatrix7, @Fndroid, @Anti
+# @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
 # @ConfigVersion             1.0.7
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式
