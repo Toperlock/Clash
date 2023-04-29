@@ -73,9 +73,10 @@ pr:
     - ♻️ 自动选择
     - 🚀 手动切换
     - 🇭🇰 香港节点
-    - 🇯🇵 日本节点
-    - 🇺🇲 美国节点
     - 🇨🇳 台湾节点
+    - 🇯🇵 日本节点
+    - 🇰🇷 韩国节点
+    - 🇺🇲 美国节点
     - 🇸🇬 狮城节点
     - DIRECT
 p:
@@ -114,6 +115,8 @@ i:
   type: http
   behavior: ipcidr
   interval: 86400
+
+
 proxy-providers:
   Subscribe:
     <<: *a1
@@ -170,12 +173,15 @@ proxy-groups:
   - name: 🇭🇰 香港节点
     <<: *a2
     filter: 港|HK|(?i)Hong
-  - name: 🇯🇵 日本节点
-    <<: *a4
-    filter: 日|东京|JP|(?i)Japan
   - name: 🇨🇳 台湾节点
     <<: *a4
     filter: 台|湾|TW|(?i)Taiwan
+  - name: 🇯🇵 日本节点
+    <<: *a4
+    filter: 日|东京|JP|(?i)Japan
+  - name: 🇰🇷 韩国节点
+    <<: *a4
+    filter: 韩|韓|首尔|KR|(?i)Korea
   - name: 🇺🇲 美国节点
     <<: *a2
     filter: 美|US|(?i)States|American
@@ -271,7 +277,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml
     path: ./ruleset/Download.yaml
     interval: 86400
-    
+
 rules:
   - RULE-SET,Ad,🆎 AdBlock
   - RULE-SET,GlobalMedia,🎬 国际媒体
@@ -291,3 +297,4 @@ rules:
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - MATCH,🐟 兜底分流
+ 
