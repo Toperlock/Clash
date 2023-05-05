@@ -1,53 +1,69 @@
 # @ConfigName                自用Clash配置文件
-# @Author                    @ddgksf2013, @可莉
+# @Author                    @ddgksf2013, @可莉，@Repcz
 # @Function                  支持手动选择、自动测速、广告屏蔽、兜底分流、按国家分组节点等等
 # @ClashDownload             https://github.com/Fndroid/clash_for_windows_pkg/releases
 # @Clash_Chinese_Patch       https://github.com/BoyceLig/Clash_Chinese_Patch/releases
 # @ddgksf2013 GitHub link    https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
 # @iKeLee Gitlab link        https://gitlab.com/lodepuly/vpn_tool/-/tree/main/Tool/Clash/Config
+# @Repcz GitHub link         https://github.com/Repcz/Open-Proflies/tree/main/Clash
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
 # @ConfigVersion             1.0.7
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式
 
-port: 7890
-socks-port: 7891
-#redir-port: 7892
-mixed-port: 7893
-allow-lan: true
+port: 7890                   # HTTP 代理端口
+socks-port: 7891             # SOCKS5 代理端口
+#redir-port: 7892            # Linux 和 macOS 的 redir 代理端口
+mixed-port: 7893             # 混合端口 HTTP和SOCKS5用一个端口
+allow-lan: true              # 允许局域网的连接（可用来共享代理）
+bind-address: "*"            # 仅在将allow-lan设置为true时适用
+                             # #"*": 绑定所有IP地址
+ipv6: false                  # 开启 IPv6 总开关，关闭阻断所有 IPv6 链接和屏蔽 DNS 请求 AAAA 记录
+mode: rule                   # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
+log-level: info              # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
+external-controller: 127.0.0.1:9090      #外部控制器,可以使用 RESTful API 来控制你的 clash 内核
 
-# This is only applicable when `allow-lan` is `true`
-# '*': bind all IP addresses
-# 192.168.122.11: bind a single IPv4 address
-# "[aaaa::a8aa:ff:fe09:57d8]": bind a single IPv6 address
-bind-address: "*"
-# Clash router working mode
-# rule: rule-based packet routing
-# global: all packets will be forwarded to a single endpoint
-# direct: directly forward the packets to the Internet
-mode: Rule
-# Clash by default prints logs to STDOUT
-# info / warning / error / debug / silent
-log-level: info
-# RESTful web API listening address
-external-controller: 127.0.0.1:9090
 dns:
-  enable: true
-  ipv6: true
-  listen: 0.0.0.0:53
-  enhanced-mode: fake-ip
-  nameserver:
+  enable: true               # 关闭将使用系统 DNS
+  ipv6: false                # IPV6解析开关；如果为false，将返回ipv6结果为空
+  enhanced-mode: fake-ip     # 模式：redir-host或fake-ip
+  listen: 0.0.0.0:53         # DNS监听地址
+  default-nameserver:        # 解析非IP的dns用的dns服务器,只支持纯IP
+     - 223.5.5.5
      - 119.29.29.29
-     - 114.114.114.114
+  fake-ip-range: 198.18.0.1/16           # Fake-IP解析地址池
+  fake-ip-filter:            # fake ip 白名单列表,以下地址不会下发fakeip映射用于连接
+     - '*.lan'
+     - localhost.ptlogin2.qq.com
+     - '+.srv.nintendo.net'
+     - '+.stun.playstation.net'
+     - '+.msftconnecttest.com'
+     - '+.msftncsi.com'
+     - '+.xboxlive.com'
+     - 'msftconnecttest.com'
+     - 'xbox.*.microsoft.com'
+     - '*.battlenet.com.cn'
+     - '*.battlenet.com'
+     - '*.blzstatic.cn'
+     - '*.battle.net'
+     - '*.mcdn.bilivideo.cn'
+  nameserver:                # 默认DNS服务器，支持udp/tcp/dot/doh/doq
+     - 119.29.29.29
 # 腾讯阿里DoH2
      - https://1.12.12.12/dns-query
      - https://223.5.5.5/dns-query
-  fallback:
-# 腾讯DoH2
-     - https://120.53.53.53/dns-query
-
-profile:
-  tracing: true
+  fallback:                  # 解析国外域名的DNS服务器
+     - https://doh.pub/dns-query
+     - https://dns.alidns.com/dns-query
+  fallback-filter:           # 配置 fallback 使用条件
+    geoip: true              # 配置是否使用 geoip
+    geoip-code: CN           # 当 nameserver 域名的 IP 查询 geoip 库为 CN 时，不使用 fallback 中的 DNS 查询结果
+    ipcidr:                  # 在这个网段内的 IP 地址会被考虑为被污染的 IP
+      - 240.0.0.0/4
+    domain:                  # 这些域名被视为已污染,匹配到这些域名,会直接使用fallback解析,不去使用nameserver
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
 
 
 # interval 代表间隔时间，单位为 s；
@@ -65,9 +81,11 @@ profile:
 # 默认每48小时更新一次节点订阅，每 30分钟 检测一次健康度。
 
 
-# 锚点
+###建立锚点
+
+# 策略组引用相关
 pr:
-  &a3
+  &pr
   type: select
   proxies:
     - ♻️ 自动选择
@@ -79,47 +97,60 @@ pr:
     - 🇺🇲 美国节点
     - 🇸🇬 狮城节点
     - DIRECT
+
+# 订阅更新和延迟测试相关
 p:
-  &a1
+  &p
   type: http
   interval: 86400
   health-check:
     enable: true
     url: http://www.gstatic.com/generate_204
     interval: 1800
+
+# 自动选择相关
 auto:
-  &a4
+  &auto
   type: url-test
   lazy: true
   url: http://www.gstatic.com/generate_204
   interval: 900
   use:
     - Subscribe
+
+# 手动选择相关
 use:
-  &a2
+  &use
   type: select
   use:
     - Subscribe
+
+# classical规则相关
 c:
-  &a6
+  &c
   type: http
   behavior: classical
   interval: 86400
+
+# domain规则相关
 d:
-  &a5
+  &d
   type: http
   behavior: domain
   interval: 86400
+
+# ipcidr规则相关
 i:
-  &a7
+  &i
   type: http
   behavior: ipcidr
   interval: 86400
 
+###结束
 
 proxy-providers:
   Subscribe:
-    <<: *a1
+    <<: *p
     url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的编码后的订阅[多链接用|分割]&list=true&udp=false
     path: ./proxy_providers/tmp.yaml
     interval: 172800
@@ -129,32 +160,33 @@ proxy-providers:
       interval: 1800
 
 proxies: null
+
 proxy-groups:
 # 分流分组
   - name: 🚀 手动切换
-    <<: *a2
+    <<: *use
   - name: 🆎 AdBlock
     type: select
     proxies:
       - REJECT
   - name: 🎬 国际媒体
-    <<: *a3
+    <<: *pr
   - name: 🛍️ 亚马逊
-    <<: *a3
+    <<: *pr
   - name: 🍎 苹果服务
-    <<: *a3
+    <<: *pr
   - name: 🌌 谷歌服务
-    <<: *a3
+    <<: *pr
   - name: 📟 电报消息
-    <<: *a3
-  - name: 🐦 推特服务
-    <<: *a3
+    <<: *pr
+  - name: 🐦 推特消息
+    <<: *pr
   - name: 🤖 OpenAI
     type: select
     proxies:
       - 🇺🇲 美国节点
   - name: 🤖 New Bing
-    <<: *a3
+    <<: *pr
   - name: 📺 哔哩哔哩
     type: select
     proxies:
@@ -162,118 +194,118 @@ proxy-groups:
       - 🇭🇰 香港节点
       - 🇨🇳 台湾节点
   - name: 🎮 游戏平台
-    <<: *a3
+    <<: *pr
   - name: 🌏 全球加速
-    <<: *a3
+    <<: *pr
   - name: 🐟 兜底分流
-    <<: *a3
-# 节点分组
+    <<: *pr
+# 节点地区分组
   - name: ♻️ 自动选择
-    <<: *a4
+    <<: *auto
   - name: 🇭🇰 香港节点
-    <<: *a2
+    <<: *use
     filter: 港|HK|(?i)Hong
   - name: 🇨🇳 台湾节点
-    <<: *a4
+    <<: *use
     filter: 台|湾|TW|(?i)Taiwan
   - name: 🇯🇵 日本节点
-    <<: *a4
+    <<: *use
     filter: 日|东京|JP|(?i)Japan
   - name: 🇰🇷 韩国节点
-    <<: *a4
+    <<: *use
     filter: 韩|韓|首尔|KR|(?i)Korea
   - name: 🇺🇲 美国节点
-    <<: *a2
+    <<: *use
     filter: 美|US|(?i)States|American
   - name: 🇸🇬 狮城节点
-    <<: *a4
+    <<: *use
     filter: 新|坡|SG|(?i)Singapore
 
 # 分流规则订阅
 # 默认每二十四小时更新一次分流规则
 rule-providers:
-  Ad:
-    <<: *a5
+  Ad: # 广告
+    <<: *d
     url: https://anti-ad.net/clash.yaml
     path: ./ruleset/anti-ad-clash.yaml
     interval: 86400
-  GlobalMedia:
-    <<: *a6
+  GlobalMedia: # 国际媒体
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml
     path: ./ruleset/GlobalMedia.yaml
     interval: 86400
-  Amazon:
-    <<: *a6
+  Amazon: # 亚马逊
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Amazon/Amazon.yaml
     path: ./ruleset/Amazon.yaml
     interval: 86400
-  Apple:
-    <<: *a6
+  Apple: # 苹果服务
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml
     path: ./ruleset/Apple.yaml
     interval: 86400
-  Github:
-    <<: *a6
+  Github: # Gtihub
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml
     path: ./ruleset/Github.yaml
     interval: 86400
-  Google:
-    <<: *a6
+  Google: # 谷歌服务
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml
     path: ./ruleset/Google.yaml
     interval: 86400
-  Telegram:
-    <<: *a6
+  Telegram: # 电报消息
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
     path: ./ruleset/Telegram.yaml
     interval: 86400
-  Twitter:
-    <<: *a6
+  Twitter: # 推特消息
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml
     path: ./ruleset/Twitter.yaml
     interval: 86400
-  OpenAI:
-    <<: *a6
+  OpenAI: # AI平台
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml
     path: ./ruleset/OpenAI.yaml
     interval: 86400
-  NewBing:
-    <<: *a6
+  NewBing: # AI平台
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml
     path: ./ruleset/Bing.yaml
     interval: 86400
-  BiliBili:
-    <<: *a6
+  BiliBili: # 哔哩哔哩
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml
     path: ./ruleset/BiliBili.yaml
     interval: 86400
-  Game:
-    <<: *a6
+  Game: # 游戏平台
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml
     path: ./ruleset/Game.yaml
     interval: 86400
-  ProxyLite:
-    <<: *a6
+  ProxyLite: # 代理网站
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ProxyLite/ProxyLite.yaml
     path: ./ruleset/ProxyLite.yaml
     interval: 86400
-  ChinaIP:
-    <<: *a7
+  ChinaIP: # 中国大陆IP
+    <<: *i
     url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml
     path: ./ruleset/ChinaIP.yaml
     interval: 86400
-  Direct:
-    <<: *a5
+  Direct: # 规则修正
+    <<: *d
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml
     path: ./ruleset/Direct.yaml
     interval: 86400
-  Lan:
-    <<: *a6
+  Lan: # 局域网
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml
     path: ./ruleset/Lan.yaml
     interval: 86400
-  Download:
-    <<: *a6
+  Download: # 下载服务
+    <<: *c
     url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml
     path: ./ruleset/Download.yaml
     interval: 86400
@@ -286,7 +318,7 @@ rules:
   - RULE-SET,Github,🌏 全球加速
   - RULE-SET,Google,🌌 谷歌服务
   - RULE-SET,Telegram,📟 电报消息
-  - RULE-SET,Twitter,🐦 推特服务
+  - RULE-SET,Twitter,🐦 推特消息
   - RULE-SET,NewBing,🤖 New Bing
   - RULE-SET,BiliBili,📺 哔哩哔哩
   - RULE-SET,Game,🎮 游戏平台
@@ -298,3 +330,6 @@ rules:
   - RULE-SET,Download,DIRECT
   - MATCH,🐟 兜底分流
  
+ script:
+  shortcuts:
+    quic: network == 'udp' and dst_port == 443
