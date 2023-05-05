@@ -311,6 +311,7 @@ rule-providers:
     interval: 86400
 
 rules:
+  - SCRIPT,quic,REJECT
   - RULE-SET,Ad,🆎 AdBlock
   - RULE-SET,GlobalMedia,🎬 国际媒体
   - RULE-SET,Amazon,🛍️ 亚马逊
