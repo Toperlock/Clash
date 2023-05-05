@@ -329,7 +329,7 @@ rules:
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - MATCH,🐟 兜底分流
- 
- script:
+
+script:
   shortcuts:
     quic: network == 'udp' and dst_port == 443
