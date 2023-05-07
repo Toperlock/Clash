@@ -73,8 +73,7 @@ dns:
 # 请使用节点订阅转换服务将服务商的订阅链接转换为 Clash 的订阅，并输出为 Node List 格式；
 # 请使用节点订阅转换工具提供的保留节点和过滤节点功能，生成不同地区的订阅链接，并填入下方 proxy-providers 区域；
 # 其他内容具体见注释；
-# 节点订阅转换网址 https://api.dler.io/
-# 如果服务商不支持上面的节点订阅转换，则使用国内的节点订阅转换服务，如 https://id9.cc/
+# 节点订阅转换网址 https://acl4ssr-sub.github.io/
 # URL在线编码工具 https://www.urlencoder.org
 
 # 节点订阅
@@ -151,7 +150,7 @@ i:
 proxy-providers:
   Subscribe:
     <<: *p
-    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的编码后的订阅[多链接用|分割]&list=true&udp=false
+    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的*编码*后的订阅[多链接用|分割]&list=true&udp=false
     path: ./proxy_providers/tmp.yaml
     interval: 172800
     health-check:
