@@ -91,10 +91,10 @@ pr:
     - 🚀 手动切换
     - 🇭🇰 香港节点
     - 🇨🇳 台湾节点
-    - 🇯🇵 日本节点
-    - 🇰🇷 韩国节点
     - 🇺🇲 美国节点
+    - 🇯🇵 日本节点
     - 🇸🇬 狮城节点
+    - 🇰🇷 韩国节点
     - DIRECT
 
 # 订阅更新和延迟测试相关
@@ -162,63 +162,29 @@ proxies: null
 
 proxy-groups:
 # 分流分组
-  - name: 🚀 手动切换
-    <<: *use
-  - name: 🆎 AdBlock
-    type: select
-    proxies:
-      - REJECT
-  - name: 🎬 国际媒体
-    <<: *pr
-  - name: 🛍️ 亚马逊
-    <<: *pr
-  - name: 🍎 苹果服务
-    <<: *pr
-  - name: 🌌 谷歌服务
-    <<: *pr
-  - name: 📟 电报消息
-    <<: *pr
-  - name: 🐦 推特消息
-    <<: *pr
-  - name: 🤖 OpenAI
-    type: select
-    proxies:
-      - 🇺🇲 美国节点
-  - name: 🤖 New Bing
-    <<: *pr
-  - name: 📺 哔哩哔哩
-    type: select
-    proxies:
-      - DIRECT
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-  - name: 🎮 游戏平台
-    <<: *pr
-  - name: 🌏 全球加速
-    <<: *pr
-  - name: 🐟 兜底分流
-    <<: *pr
+  - {name: 🚀 手动切换, <<: *use}
+  - {name: ♻️ 自动选择, <<: *auto}
+  - {name: 🆎 AdBlock, type: select, proxies: [REJECT, DIRECT]}
+  - {name: 🎬 国际媒体, <<: *pr}
+  - {name: 🛍️ 亚马逊, <<: *pr}
+  - {name: 🍎 苹果服务, <<: *pr}
+  - {name: 🌌 谷歌服务, <<: *pr}
+  - {name: 📟 电报消息, <<: *pr}
+  - {name: 🐦 推特消息, <<: *pr}
+  - {name: 🤖 OpenAI, type: select, proxies: [🇺🇲 美国节点, 🇸🇬 狮城节点]}
+  - {name: 🤖 New Bing, <<: *pr}
+  - {name: 📺 哔哩哔哩, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]}
+  - {name: 🎮 游戏平台, <<: *pr}
+  - {name: 🌏 全球加速, <<: *pr}
+  - {name: 🐟 兜底分流, <<: *pr}
 # 节点地区分组
-  - name: ♻️ 自动选择
-    <<: *auto
-  - name: 🇭🇰 香港节点
-    <<: *use
-    filter: 港|HK|(?i)Hong
-  - name: 🇨🇳 台湾节点
-    <<: *use
-    filter: 台|湾|TW|(?i)Taiwan
-  - name: 🇯🇵 日本节点
-    <<: *use
-    filter: 日|东京|JP|(?i)Japan
-  - name: 🇰🇷 韩国节点
-    <<: *use
-    filter: 韩|韓|首尔|KR|(?i)Korea
-  - name: 🇺🇲 美国节点
-    <<: *use
-    filter: 美|US|(?i)States|American
-  - name: 🇸🇬 狮城节点
-    <<: *use
-    filter: 新|坡|SG|(?i)Singapore
+  - {name: 🇭🇰 香港节点, <<: *use, filter: "港|HK|(?i)Hong"}
+  - {name: 🇨🇳 台湾节点, <<: *use, filter: "台|湾|TW|(?i)Taiwan"}
+  - {name: 🇺🇲 美国节点, <<: *use, filter: "美|(?i)States|American"}
+  - {name: 🇯🇵 日本节点, <<: *use, filter: "日|东京|JP|(?i)Japan"}
+  - {name: 🇸🇬 狮城节点, <<: *use, filter: "新|坡|SG|(?i)Singapore"}
+  - {name: 🇰🇷 韩国节点, <<: *use, filter: "韩|韓|首尔|KR|(?i)Korea"}
+
 
 # 分流规则订阅
 # 默认每二十四小时更新一次分流规则
@@ -310,6 +276,7 @@ rule-providers:
     interval: 86400
 
 rules:
+  - DOMAIN-KEYWORD, pushauction, DIRECT
   - SCRIPT,quic,REJECT
   - RULE-SET,Ad,🆎 AdBlock
   - RULE-SET,GlobalMedia,🎬 国际媒体
