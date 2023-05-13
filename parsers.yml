@@ -1,3 +1,5 @@
+# @Author             https://github.com/iczrac/Parsers-for-clash/blob/main/parsers.yml
+
 parsers: # array
   - reg: ^.*$ 
   # - reg: ^.*$ 匹配所有订阅，或  - url: https://example.com/profile.yaml 指定订阅
