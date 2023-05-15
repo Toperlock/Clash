@@ -8,7 +8,7 @@
 # @Repcz GitHub link         https://github.com/Repcz/Open-Proflies/tree/main/Clash
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
-# @ConfigVersion             1.0.7
+# @ConfigVersion             1.0.8
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式
 
 port: 7890                   # HTTP 代理端口
@@ -181,9 +181,11 @@ proxy-groups:
   - {name: 🇭🇰 香港节点, <<: *use, filter: "港|HK|(?i)Hong"}
   - {name: 🇨🇳 台湾节点, <<: *use, filter: "台|湾|TW|(?i)Taiwan"}
   - {name: 🇺🇲 美国节点, <<: *use, filter: "美|(?i)States|American"}
-  - {name: 🇯🇵 日本节点, <<: *use, filter: "日|东京|JP|(?i)Japan"}
-  - {name: 🇸🇬 狮城节点, <<: *use, filter: "新|坡|SG|(?i)Singapore"}
+  - {name: 🇯🇵 日本节点, <<: *use, filter: "日本|东京|JP|(?i)Japan"}
+  - {name: 🇸🇬 狮城节点, <<: *use, filter: "新加|坡|SG|(?i)Singapore"}
   - {name: 🇰🇷 韩国节点, <<: *use, filter: "韩|韓|首尔|KR|(?i)Korea"}
+  - {name: ✈️ 其他节点, <<: *use, filter: "^[^香台美本坡韩]*$"}
+#  - {name: ✈️ 其他节点, <<: *use, filter: "^((?!香|台|美|日本|新加坡|韩).)*$"}    # 需要meta内核
 
 
 # 分流规则订阅
@@ -276,8 +278,7 @@ rule-providers:
     interval: 86400
 
 rules:
-  - DOMAIN-KEYWORD, pushauction, DIRECT
-  - SCRIPT,quic,REJECT
+  #- SCRIPT,quic,REJECT
   - RULE-SET,Ad,🆎 AdBlock
   - RULE-SET,GlobalMedia,🎬 国际媒体
   - RULE-SET,Amazon,🛍️ 亚马逊
@@ -297,6 +298,7 @@ rules:
   - RULE-SET,Download,DIRECT
   - MATCH,🐟 兜底分流
 
-script:
-  shortcuts:
-    quic: network == 'udp' and dst_port == 443
+###需要meta内核
+#script:
+#  shortcuts:
+#    quic: network == 'udp' and dst_port == 443
