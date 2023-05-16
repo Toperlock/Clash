@@ -195,7 +195,7 @@ proxy-groups:
 rule-providers:
   Ad: # 广告
     <<: *d
-    url: https://anti-ad.net/clash.yaml
+    url: https://cdn.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/anti-ad-clash.yaml
     path: ./ruleset/anti-ad-clash.yaml
     interval: 86400
   GlobalMedia: # 国际媒体
