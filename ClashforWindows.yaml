@@ -300,7 +300,7 @@ rules:
   - RULE-SET,Download,DIRECT
   - MATCH,🐟 兜底分流
 
-###需要meta内核
+###meta内核不支持
 #script:
 #  shortcuts:
 #    quic: network == 'udp' and dst_port == 443
