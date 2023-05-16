@@ -149,10 +149,11 @@ i:
 
 ###结束
 
+# 请把中文替换你的编码后的订阅链接，多链接用|分割 例如：链接1|链接2|链接3...
 proxy-providers:
   Subscribe:
     <<: *p
-    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=请手动填入你的*编码*后的订阅[多链接用|分割]&list=true&udp=false
+    url: url: https://sub.xeton.dev/sub?target=clash&new_name=true&url=中文&list=true&udp=false
     path: ./proxy_providers/tmp.yaml
     interval: 21600
     health-check:
