@@ -10,9 +10,9 @@
 # @Repcz GitHub link         https://github.com/Repcz/Open-Proflies/tree/main/Clash
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
-# @ConfigVersion             1.0.8
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。下载Meta内核替换clash内核
 # @CFW meta tutorial         https://blog.misaka.rest/2023/04/19/cfw-change-meta
+# @Date                      2023-06-09 17:40
 
 port: 7890                   # HTTP 代理端口
 socks-port: 7891             # SOCKS5 代理端口
