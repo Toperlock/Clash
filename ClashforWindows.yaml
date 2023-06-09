@@ -12,7 +12,7 @@
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。下载Meta内核替换clash内核
 # @CFW meta tutorial         https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                      2023-06-09 17:40
+# @Date                      2023-06-09 19:38
 
 port: 7890                   # HTTP 代理端口
 socks-port: 7891             # SOCKS5 代理端口
@@ -105,7 +105,7 @@ i: &i {type: http, behavior: ipcidr, interval: 86400}
 
 ###结束
 
-# 请把中文替换你的编码后的订阅链接，多链接用|分割 例如：链接1|链接2|链接3...
+# 请把中文替换你的URL编码后的订阅链接，多链接用|分割 例如：链接1|链接2|链接3...
 proxy-providers:
   Subscribe:
     <<: *p
