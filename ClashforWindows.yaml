@@ -143,7 +143,6 @@ proxy-groups:
 
 
 # 分流规则订阅
-# 默认每二十四小时更新一次分流规则
 rule-providers:
   # 规则修正
   Direct: {<<: *d, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml, path: ./ruleset/Direct.yaml}
