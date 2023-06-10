@@ -12,7 +12,7 @@
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。下载Meta内核替换clash内核
 # @CFW meta tutorial         https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                      2023-06-09 19:38
+# @Date                      2023-06-10 08:54
 
 port: 7890                   # HTTP 代理端口
 socks-port: 7891             # SOCKS5 代理端口
@@ -170,7 +170,7 @@ rule-providers:
   # 谷歌服务
   Google: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
   # TikTok
-  Twitter: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml, path: ./ruleset/TikTok.yaml}
+  TikTok: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml, path: ./ruleset/TikTok.yaml}
   # 国际媒体
   GlobalMedia: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml, path: ./ruleset/GlobalMedia.yaml}
   # 游戏平台
@@ -185,7 +185,7 @@ rules:
   - RULE-SET,Direct,DIRECT
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
-  - RULE-SET,Ad,🆎 AdBlock
+  - RULE-SET,Anti-AD,🆎 AdBlock
   - RULE-SET,Telegram,📟 电报消息
   - RULE-SET,Twitter,🐦 推特消息
   - RULE-SET,OpenAI,🤖 OpenAI
