@@ -156,15 +156,17 @@ rule-providers:
   Anti-AD: {<<: *d, url: https://cdn.jsdelivr.net/gh/privacy-protection-tools/anti-AD@master/anti-ad-clash.yaml, path: ./ruleset/anti-ad-clash.yaml}
   #HTTPDNS拦截
   HTTPDNS: {<<: *d, url: https://cdn.jsdelivr.net/gh/VirgilClyne/GetSomeFries@main/ruleset/HTTPDNS.Block.yaml, path: ./ruleset/HTTPDNS.Block.yaml}
+  # AI平台
+  OpenAI: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAI.yaml}
+  NewBing: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml, path: ./ruleset/Bing.yaml}
+  # 谷歌服务
+  Google: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
   # 电报消息
   Telegram: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml, path: ./ruleset/Telegram.yaml}
   # 推特消息
   Twitter: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml, path: ./ruleset/Twitter.yaml}
   # Facebook
   Facebook: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash//Facebook/Facebook.yaml, path: ./ruleset/Facebook.yaml}
-  # AI平台
-  OpenAI: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAI.yaml}
-  NewBing: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml, path: ./ruleset/Bing.yaml}
   # 哔哩哔哩
   BiliBili: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml, path: ./ruleset/BiliBili.yaml}
   # 亚马逊
@@ -175,8 +177,6 @@ rule-providers:
   Microsoft: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml, path: ./ruleset/Microsoft.yaml}
   # Gtihub
   Github: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml, path: ./ruleset/Github.yaml}
-  # 谷歌服务
-  Google: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
   # TikTok
   TikTok: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml, path: ./ruleset/TikTok.yaml}
   # 国际媒体
@@ -195,17 +195,17 @@ rules:
   - RULE-SET,Download,DIRECT
   - RULE-SET,Anti-AD,🆎 AdBlock
   - RULE-SET,HTTPDNS,🆎 AdBlock
+  - RULE-SET,OpenAI,🤖 OpenAI
+  - RULE-SET,NewBing,🤖 New Bing
+  - RULE-SET,Google,🌌 谷歌服务
   - RULE-SET,Telegram,📟 电报消息
   - RULE-SET,Twitter,🐦 推特消息
   - RULE-SET,Facebook,👤 Facebook
-  - RULE-SET,OpenAI,🤖 OpenAI
-  - RULE-SET,NewBing,🤖 New Bing
   - RULE-SET,BiliBili,📺 哔哩哔哩
   - RULE-SET,Amazon,🛍️ 亚马逊
   - RULE-SET,Apple,🍎 苹果服务
   - RULE-SET,Microsoft,🧩 微软服务
   - RULE-SET,Github,🌏 全球加速
-  - RULE-SET,Google,🌌 谷歌服务
   - RULE-SET,TikTok,🎬 国际媒体
   - RULE-SET,GlobalMedia,🎬 国际媒体
   - RULE-SET,Game,🎮 游戏平台
