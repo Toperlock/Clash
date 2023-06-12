@@ -119,19 +119,19 @@ proxy-groups:
   - {name: 🚀 手动切换, <<: *use}
   - {name: ♻️ 自动选择, <<: *auto}
   - {name: 🆎 AdBlock, type: select, proxies: [REJECT, DIRECT]}
-  - {name: 🎬 国际媒体, <<: *pr}
-  - {name: 🛍️ 亚马逊, <<: *pr}
-  - {name: 🍎 苹果服务, <<: *pr}
-  - {name: 🧩 微软服务, <<: *pr}
+  - {name: 🤖 OpenAI, <<: *pr}
+  - {name: 🤖 New Bing, <<: *pr}
   - {name: 🌌 谷歌服务, <<: *pr}
   - {name: 📟 电报消息, <<: *pr}
   - {name: 🐦 推特消息, <<: *pr}
   - {name: 👤 Facebook, <<: *pr}
-  - {name: 🤖 OpenAI, <<: *pr}
-  - {name: 🤖 New Bing, <<: *pr}
+  - {name: 🛍️ 亚马逊, <<: *pr}
+  - {name: 🍎 苹果服务, <<: *pr}
+  - {name: 🧩 微软服务, <<: *pr}
   - {name: 📺 哔哩哔哩, type: select, proxies: [DIRECT, 🇭🇰 香港节点, 🇨🇳 台湾节点]}
-  - {name: 🎮 游戏平台, <<: *pr}
   - {name: 🌏 全球加速, <<: *pr}
+  - {name: 🎬 国际媒体, <<: *pr}
+  - {name: 🎮 游戏平台, <<: *pr}
   - {name: 🐟 兜底分流, <<: *pr}
 # 节点地区分组
   - {name: 🇭🇰 香港节点, <<: *use, filter: "港|HK|(?i)Hong"}
