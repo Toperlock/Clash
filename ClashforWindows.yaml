@@ -113,6 +113,25 @@ proxy-providers:
     path: ./proxy_providers/tmp.yaml
 
 proxies: null
+# 有warp节点用这个格式
+
+#proxies:
+#  - name: "wg"
+#    type: wireguard
+#    server: 127.0.0.1
+#    port: 443
+#    ip: 172.16.0.2
+#    # ipv6: your_ipv6
+#    private-key: eCtXsJZ27+4PbhDkHnB923tkUn2Gj59wZw5wFA75MnU=
+#    public-key: Cr8hWlKvtDt7nrvf+f0brNQQzabAqrjfBvas9pmowjo=
+#    # preshared-key: base64
+#    # remote-dns-resolve: true # remote resolve DNS with `dns` field, default is true
+#    # dns: [1.1.1.1, 8.8.8.8]
+#    # mtu: 1420
+#    udp: true
+# 或者:
+#proxies:
+#  - {name:  WARP,type: wireguard,server: 修改为优选IP,port: 端口,ip: 172.16.0.2,public-key: 公钥,private-key: 私钥,mtu: 1280,udp: true}
 
 proxy-groups:
 # 分流分组
