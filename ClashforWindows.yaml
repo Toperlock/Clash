@@ -113,8 +113,8 @@ proxy-providers:
     path: ./proxy_providers/tmp.yaml
 
 proxies: null
-# 有warp节点用这个格式
 
+# 有warp节点用这个格式
 #proxies:
 #  - name: "wg"
 #    type: wireguard
