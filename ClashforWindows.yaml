@@ -2,14 +2,13 @@
 # @Author                    @ddgksf2013, @iKeLee, @Repcz
 # @Function                  支持手动选择、自动测速、广告屏蔽、兜底分流、按国家分组节点等等
 # @Clash Download            https://github.com/Fndroid/clash_for_windows_pkg/releases
-# @Clash Verge Download      https://github.com/zzzgydi/clash-verge/releases
 # @Clash_Chinese_Patch       https://github.com/BoyceLig/Clash_Chinese_Patch/releases
 # @Clash.Meta Core           https://github.com/MetaCubeX/Clash.Meta/releases
+# @Clash Verge Download      https://github.com/zzzgydi/clash-verge/releases
 # @ddgksf2013 GitHub link    https://github.com/ddgksf2013/Profile/blob/master/ClashforWindows.yaml
 # @iKeLee Gitlab link        https://gitlab.com/lodepuly/vpn_tool/-/tree/main/Tool/Clash/Config
 # @Repcz GitHub link         https://github.com/Repcz/Open-Proflies/tree/main/Clash
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
-# @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。
 # @CFW meta tutorial         下载Meta内核替换clash内核：https://blog.misaka.rest/2023/04/19/cfw-change-meta
 # @Date                      2023-07-08 08:07
