@@ -10,9 +10,9 @@
 # @Repcz GitHub link         https://github.com/Repcz/Open-Proflies/tree/main/Clash
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Attention                 𝐏𝐥𝐞𝐚𝐬𝐞 𝐮𝐬𝐞 𝐭𝐡𝐞 𝐥𝐚𝐭𝐞𝐬𝐭 𝐯𝐞𝐫𝐬𝐢𝐨𝐧 𝐨𝐟 𝐂𝐥𝐚𝐬𝐡𝐟𝐨𝐫𝐖𝐢𝐧𝐝𝐨𝐰𝐬
-# @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。下载Meta内核替换clash内核
-# @CFW meta tutorial         https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                      2023-06-10 22:15
+# @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。
+# @CFW meta tutorial         下载Meta内核替换clash内核：https://blog.misaka.rest/2023/04/19/cfw-change-meta
+# @Date                      2023-07-08 08:07
 
 port: 7890                   # HTTP 代理端口
 socks-port: 7891             # SOCKS5 代理端口
@@ -151,6 +151,7 @@ proxy-groups:
   - {name: 🌏 全球加速, <<: *pr}
   - {name: 🎬 国际媒体, <<: *pr}
   - {name: 🎮 游戏平台, <<: *pr}
+  - {name: 🌏 国内网站, type: select, proxies: [DIRECT, 🚀 手动切换]}
   - {name: 🐟 兜底分流, <<: *pr}
 # 节点地区分组
   - {name: 🇭🇰 香港节点, <<: *use, filter: "港|HK|(?i)Hong"}
@@ -229,8 +230,8 @@ rules:
   - RULE-SET,GlobalMedia,🎬 国际媒体
   - RULE-SET,Game,🎮 游戏平台
   - RULE-SET,ProxyLite,🌏 全球加速
-  - RULE-SET,ChinaIP,DIRECT
-  - GEOIP,CN,DIRECT
+  - RULE-SET,ChinaIP,🌏 国内网站
+  - GEOIP,CN,🌏 国内网站
   - MATCH,🐟 兜底分流
 
 ###meta内核不支持
