@@ -67,17 +67,10 @@ dns:
       - '+.facebook.com'
       - '+.youtube.com'
 
-
 # interval 代表间隔时间，单位为 s；
 # tolerance 代表容差时间，单位为 ms；
 # 由于分流规则引用了 GitHub 文件，如果你的本地网络无法访问 GitHub，你将无法让 Clash 正常工作；
-# 你需要先使用翻墙工具让本地网络出墙，再启动 Clash 才能正常下载分流规则并正常启动，待 Clash 启动成功并更新完订阅资源和分流规则之后，方可关闭你之前打开的翻墙工具；
-# 请使用节点订阅转换服务将服务商的订阅链接转换为 Clash 的订阅，并输出为 Node List 格式；
-# 请使用节点订阅转换工具提供的保留节点和过滤节点功能，生成不同地区的订阅链接，并填入下方 proxy-providers 区域；
 # 其他内容具体见注释；
-# 节点订阅转换网址 https://acl4ssr-sub.github.io/
-# URL在线编码工具 https://www.urlencoder.org
-
 
 ###建立锚点
 
@@ -104,11 +97,15 @@ i: &i {type: http, behavior: ipcidr, interval: 86400}
 
 ###结束
 
-# 请把中文替换你的URL编码后的订阅链接，多链接用|分割 例如：链接1|链接2|链接3...
+# 请把中文替换使用URL编码工具编码后的订阅链接，多链接用|分割 例如：链接1|链接2|链接3...
+# url格式1：https://sub.xeton.dev/sub?target=clash&url=中文&list=true&udp=false
+# url格式2：直接填写你的机场Clash订阅[单一订阅][推荐此种方式，避免订阅泄露]
+# 节点订阅转换网址 https://acl4ssr-sub.github.io
+# URL在线编码工具 https://www.urlencoder.org
 proxy-providers:
   Subscribe:
     <<: *p
-    url: https://sub.xeton.dev/sub?target=clash&url=中文&list=true&udp=false
+    url: 订阅链接
     path: ./proxy_providers/tmp.yaml
 
 proxies: null
@@ -161,7 +158,6 @@ proxy-groups:
   - {name: 🇰🇷 韩国节点, <<: *use, filter: "韩|韓|首尔|KR|(?i)Korea"}
   - {name: ✈️ 其他节点, <<: *use, filter: "^[^香台美本坡韩]*$"}
 #  - {name: ✈️ 其他节点, <<: *use, filter: "^((?!香|台|美|日本|新加坡|韩).)*$"}    # 需要meta内核
-
 
 # 分流规则订阅
 rule-providers:
