@@ -25,6 +25,7 @@ i: &i {type: http, behavior: ipcidr, interval: 86400}
 
 
 # url 里填写自己的订阅,名称不能重复
+# Meta支持机场通用订阅
 proxy-providers:
   provider1:
     <<: *p
@@ -91,7 +92,7 @@ dns:
   ipv6: false                       # IPV6解析开关；如果为false，将返回ipv6结果为空
   enhanced-mode: fake-ip            # 模式：redir-host或fake-ip
   fake-ip-range: 198.18.0.1/16      # Fake-IP解析地址池
-  fake-ip-filter:          # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
+  fake-ip-filter:                   # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
     - '*.lan' 
     - 'cable.auth.com' 
     - '*.msftconnecttest.com' 
@@ -218,7 +219,7 @@ rules:
   - GEOSITE,hbo,🎬 国际媒体
   - GEOSITE,disney,🎬 国际媒体
   - GEOSITE,primevideo,🎬 国际媒体
-  - GEOSITE,github,🧩 微软服务
+  - GEOSITE,github,🌌 谷歌服务
   - GEOSITE,bilibili,📺 哔哩哔哩
   - GEOSITE,telegram,📟 电报消息
   - GEOIP,telegram,📟 电报消息
