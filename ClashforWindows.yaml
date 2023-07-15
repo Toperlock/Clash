@@ -11,7 +11,7 @@
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。
 # @CFW meta tutorial         下载Meta内核替换clash内核：https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                      2023-07-12 08:26
+# @Date                      2023-07-15 08:07
 
 port: 7890                   # HTTP 代理端口
 socks-port: 7891             # SOCKS5 代理端口
@@ -135,7 +135,6 @@ proxy-groups:
   - {name: ♻️ 自动选择, <<: *auto}
   - {name: 🆎 AdBlock, type: select, proxies: [REJECT, DIRECT]}
   - {name: 🤖 OpenAI, <<: *pr}
-  - {name: 🤖 New Bing, <<: *pr}
   - {name: 🌌 谷歌服务, <<: *pr}
   - {name: 📟 电报消息, <<: *pr}
   - {name: 🐦 推特消息, <<: *pr}
@@ -173,7 +172,6 @@ rule-providers:
   HTTPDNS: {<<: *d, url: https://cdn.jsdelivr.net/gh/VirgilClyne/GetSomeFries@main/ruleset/HTTPDNS.Block.yaml, path: ./ruleset/HTTPDNS.Block.yaml}
   # AI平台
   OpenAI: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml, path: ./ruleset/OpenAI.yaml}
-  NewBing: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml, path: ./ruleset/Bing.yaml}
   # 谷歌服务
   Google: {<<: *c, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml, path: ./ruleset/Google.yaml}
   # 电报消息
@@ -211,7 +209,6 @@ rules:
   - RULE-SET,Anti-AD,🆎 AdBlock
   - RULE-SET,HTTPDNS,🆎 AdBlock
   - RULE-SET,OpenAI,🤖 OpenAI
-  - RULE-SET,NewBing,🤖 New Bing
   - RULE-SET,Google,🌌 谷歌服务
   - RULE-SET,Telegram,📟 电报消息
   - RULE-SET,Twitter,🐦 推特消息
