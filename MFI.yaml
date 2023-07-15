@@ -226,7 +226,6 @@ rules:
   - GEOSITE,twitter,🐦 推特消息
   - GEOIP,facebook,👤 Facebook
   - GEOSITE,facebook,👤 Facebook
-  - GEOIP,instagram,👤 Facebook
   - GEOSITE,instagram,👤 Facebook
   - GEOSITE,amazon,🛍️ 亚马逊
   - GEOSITE,apple,🍎 苹果服务
