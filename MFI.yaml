@@ -49,7 +49,7 @@ global-client-fingerprint: chrome   # 全局 TLS 指纹，优先低于 proxy 内
                                     # 可选： "chrome","firefox","safari","ios","random","none" options.
 unified-delay: false                # 统一延迟，更换延迟计算方式，去除握手等额外延迟
 
-geox-url:                           # 自定义 geodata url
+geox-url:                           # 自定义 geodata url, 需要有代理的前提才能下载geoip和geosite
   geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
   geosite: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
   #mmdb: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb"
