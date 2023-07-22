@@ -11,10 +11,10 @@
 # @Thanks                    @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Note                      开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。
 # @CFW meta tutorial         下载Meta内核替换clash内核：https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                      2023-07-15 08:07
+# @Date                      2023-07-22 11:04
 
-port: 7890                   # HTTP 代理端口
-socks-port: 7891             # SOCKS5 代理端口
+#port: 7890                  # HTTP 代理端口
+#socks-port: 7891            # SOCKS5 代理端口
 #redir-port: 7892            # Linux 和 macOS 的 redir 代理端口
 mixed-port: 7893             # 混合端口 HTTP和SOCKS5用一个端口
 allow-lan: true              # 允许局域网的连接（可用来共享代理）
@@ -35,20 +35,71 @@ dns:
     - 119.29.29.29
   fake-ip-range: 198.18.0.1/16           # Fake-IP解析地址池
   fake-ip-filter:            # fake ip 白名单列表,以下地址不会下发fakeip映射用于连接
-    - '*.lan'
-    - localhost.ptlogin2.qq.com
-    - '+.srv.nintendo.net'
-    - '+.stun.playstation.net'
-    - '+.msftconnecttest.com'
-    - '+.msftncsi.com'
-    - '+.xboxlive.com'
-    - 'msftconnecttest.com'
-    - 'xbox.*.microsoft.com'
-    - '*.battlenet.com.cn'
-    - '*.battlenet.com'
-    - '*.blzstatic.cn'
-    - '*.battle.net'
-    - '*.mcdn.bilivideo.cn'
+    - '*.lan' 
+    - 'cable.auth.com' 
+    - '*.msftconnecttest.com' 
+    - '*.msftncsi.com' 
+    - 'network-test.debian.org'
+    - 'detectportal.firefox.com' 
+    - 'resolver1.opendns.com' 
+    - '*.srv.nintendo.net' 
+    - '*.stun.playstation.net' 
+    - 'xbox.*.microsoft.com' 
+    - '*.xboxlive.com' 
+    - 'stun.*' 
+    - 'global.turn.twilio.com' 
+    - 'global.stun.twilio.com' 
+    - 'localhost.*.qq.com' 
+    - 'localhost.*.weixin.qq.com' 
+    - '*.logon.battlenet.com.cn' 
+    - '*.logon.battle.net' 
+    - '*.blzstatic.cn' 
+    - 'music.163.com' 
+    - '*.music.163.com' 
+    - '*.126.net' 
+    - 'musicapi.taihe.com' 
+    - 'music.taihe.com' 
+    - 'songsearch.kugou.com' 
+    - 'trackercdn.kugou.com' 
+    - '*.kuwo.cn' 
+    - 'api-jooxtt.sanook.com' 
+    - 'api.joox.com' 
+    - 'joox.com' 
+    - 'y.qq.com' 
+    - '*.y.qq.com' 
+    - 'streamoc.music.tc.qq.com' 
+    - 'mobileoc.music.tc.qq.com' 
+    - 'isure.stream.qqmusic.qq.com' 
+    - 'dl.stream.qqmusic.qq.com' 
+    - 'aqqmusic.tc.qq.com' 
+    - 'amobile.music.tc.qq.com' 
+    - '*.xiami.com' 
+    - '*.music.migu.cn' 
+    - 'music.migu.cn' 
+    - 'proxy.golang.org' 
+    - '*.mcdn.bilivideo.cn' 
+    - '*.cmpassport.com' 
+    - 'id6.me' 
+    - 'open.e.189.cn' 
+    - 'mdn.open.wo.cn' 
+    - 'opencloud.wostore.cn' 
+    - 'auth.wosms.cn' 
+    - '*.jegotrip.com.cn' 
+    - '*.icitymobile.mobi' 
+    - '*.pingan.com.cn' 
+    - '*.cmbchina.com' 
+    - 'pool.ntp.org' 
+    - '*.pool.ntp.org' 
+    - 'ntp.*.com' 
+    - 'time.*.com' 
+    - 'ntp?.*.com' 
+    - 'time?.*.com' 
+    - 'time.*.gov' 
+    - 'time.*.edu.cn' 
+    - '*.ntp.org.cn' 
+    - 'PDC._msDCS.*.*' 
+    - 'DC._msDCS.*.*' 
+    - 'GC._msDCS.*.*'
   nameserver:                # 默认DNS服务器，支持udp/tcp/dot/doh/doq
     - 119.29.29.29
 # 腾讯阿里DoH2
