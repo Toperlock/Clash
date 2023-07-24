@@ -33,7 +33,7 @@ proxy-providers:
     url: "" 
     path: ./proxy_providers/tmp.yaml
 
-system-proxy: true                  # 开启HTTP代理 比纯tun节省资源
+#system-proxy: true                  # 开启HTTP代理 比纯tun节省资源
 mixed-port: 7890                    # 混合端口 HTTP和SOCKS5用一个端口
 geodata-mode: true                  #【Meta专属】使用geoip.dat数据库(默认：false使用mmdb数据库)
 tcp-concurrent: false               #【Meta专属】TCP 并发连接所有 IP, 将使用最快握手的 TCP
