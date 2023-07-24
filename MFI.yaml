@@ -1,3 +1,6 @@
+# @ConfigName                       自用Clash Meta配置文件 https://github.com/Toperlock/Clash/edit/main/MFI.yaml
+# @Date                             2023-07-24 17:44
+
 ###建立锚点
 
 # 策略组引用相关
@@ -45,6 +48,7 @@ ipv6: false                         # 开启 IPv6 总开关，关闭阻断所有
 mode: rule                          # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 log-level: info                     # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
 external-controller: 0.0.0.0:9090   # 外部控制器,可以使用 RESTful API 来控制你的 clash 内核
+secret: ''                          # 你可以加入 secret 进行 API 鉴权
 global-client-fingerprint: chrome   # 全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
                                     # 可选： "chrome","firefox","safari","ios","random","none" options.
 unified-delay: false                # 统一延迟，更换延迟计算方式，去除握手等额外延迟
@@ -179,7 +183,7 @@ dns:
     ipcidr:                         # 在这个网段内的 IP 地址会被考虑为被污染的 IP
       - 240.0.0.0/4
 
-proxies:
+proxies: null
 
 proxy-groups:
 # 分流分组
