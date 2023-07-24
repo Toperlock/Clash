@@ -48,7 +48,7 @@ ipv6: false                         # 开启 IPv6 总开关，关闭阻断所有
 mode: rule                          # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 log-level: info                     # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
 external-controller: 0.0.0.0:9090   # 外部控制器,可以使用 RESTful API 来控制你的 clash 内核
-secret: ''                          # 你可以加入 secret 进行 API 鉴权
+secret: ''                          # 设置API密码，进行 API 鉴权
 global-client-fingerprint: chrome   # 全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
                                     # 可选： "chrome","firefox","safari","ios","random","none" options.
 unified-delay: false                # 统一延迟，更换延迟计算方式，去除握手等额外延迟
