@@ -1,7 +1,7 @@
 ###建立锚点
 
 # 策略组引用相关
-pr: &pr {type: select, proxies: [DIRECT, 🚀 手动切换, ♻️ 自动选择, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇺🇲 美国节点, 🇯🇵 日本节点, 🇸🇬 狮城节点,  🇰🇷 韩国节点, ✈️ 其他节点]}
+pr: &pr {type: select, proxies: [DIRECT, 🚀 手动切换, ♻️ 自动选择, 🇭🇰 香港节点, 🇨🇳 台湾节点, 🇺🇸 美国节点, 🇯🇵 日本节点, 🇸🇬 狮城节点,  🇰🇷 韩国节点, ✈️ 其他节点]}
 
 # 订阅更新和延迟测试相关
 p: &p {type: http, interval: 86400, health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800}}
@@ -203,7 +203,7 @@ proxy-groups:
 # 节点地区分组
   - {name: 🇭🇰 香港节点, <<: *use, filter: "港|HK|(?i)Hong"}
   - {name: 🇨🇳 台湾节点, <<: *use, filter: "台|湾|TW|(?i)Taiwan"}
-  - {name: 🇺🇲 美国节点, <<: *use, filter: "美|(?i)States|American"}
+  - {name: 🇺🇸 美国节点, <<: *use, filter: "美|(?i)States|American"}
   - {name: 🇯🇵 日本节点, <<: *use, filter: "日本|东京|JP|(?i)Japan"}
   - {name: 🇸🇬 狮城节点, <<: *use, filter: "新加|坡|SG|(?i)Singapore"}
   - {name: 🇰🇷 韩国节点, <<: *use, filter: "韩|韓|首尔|KR|(?i)Korea"}
