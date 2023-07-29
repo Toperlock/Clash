@@ -11,7 +11,7 @@
 # @Thanks                                @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Note                                  开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。
 # @CFW meta tutorial                     下载Meta内核替换clash内核：https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                                  2023-07-29 09:03
+# @Date                                  2023-07-29 16:56
 
 #port: 7890                              # HTTP 代理端口
 #socks-port: 7891                        # SOCKS5 代理端口
@@ -40,8 +40,9 @@ dns:
     - 119.29.29.29
     - 223.5.5.5
   fallback:                              # 解析国外域名的DNS服务器
-    - https://doh.apad.pro/dns-query
+    - https://doh.pub/dns-query
     - https://dns.alidns.com/dns-query
+  # - https://doh.apad.pro/dns-query
   fallback-filter:                       # 配置 fallback 使用条件
     geoip: true                          # 配置是否使用 geoip
     geoip-code: CN                       # 当 nameserver 域名的 IP 查询 geoip 库为 CN 时，不使用 fallback 中的 DNS 查询结果
