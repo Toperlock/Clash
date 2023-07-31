@@ -11,7 +11,7 @@
 # @Thanks                                @blackmatrix7, @Fndroid, @BoyceLig, @Anti
 # @Note                                  开启TUN Mode需要下载Service Mode，不能分流尝试修改TUN Mode里TUN Stack模式。
 # @CFW meta tutorial                     下载Meta内核替换clash内核：https://blog.misaka.rest/2023/04/19/cfw-change-meta
-# @Date                                  2023-07-29 16:56
+# @Date                                  2023-07-31 14:12
 
 #port: 7890                              # HTTP 代理端口
 #socks-port: 7891                        # SOCKS5 代理端口
@@ -82,7 +82,7 @@ i: &i {type: http, behavior: ipcidr, interval: 86400}
 # url格式1：https://sub.xeton.dev/sub?target=clash&url=中文&list=true&udp=false
 # 请把中文替换使用URL编码工具编码后的订阅链接，多链接用|分割 例如：链接1|链接2|链接3...
 # URL在线编码工具 https://www.urlencoder.org
-# url格式1不会用编码工具的的直接用节点订阅转换，转换后也一样。网址 https://acl4ssr-sub.github.io （有泄露风险）
+# url格式1如果不会用编码工具，直接用节点订阅转换，转换后也一样。网址 https://acl4ssr-sub.github.io （有泄露风险）
 # url格式2：直接填写你的机场Clash订阅[单一订阅][推荐此种方式，避免订阅泄露]
 proxy-providers:
   Subscribe:
