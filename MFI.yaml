@@ -1,6 +1,6 @@
 # @ConfigName                       自用Clash Meta配置文件 https://github.com/Toperlock/Clash/blob/main/MFI.yaml
 # @geodata                          https://github.com/Loyalsoldier/v2ray-rules-dat
-# @Date                             2023-07-29 09:02
+# @Date                             2023-07-31 19:21
 
 ###建立锚点
 
@@ -49,7 +49,7 @@ ipv6: false                         # 开启 IPv6 总开关，关闭阻断所有
 mode: rule                          # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 log-level: info                     # 设置日志输出级别 (5 个级别：silent / error / warning / info / debug）
 external-controller: 127.0.0.1:9090 # 外部控制器,可以使用 RESTful API 来控制你的 clash 内核
-secret: 'toper'                     # 自定义设置API密码，进行 API 鉴权。这里密码是 toper
+secret: ''                          # 自定义设置API密码，进行 API 鉴权。
 global-client-fingerprint: chrome   # 全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
                                     # 可选： "chrome","firefox","safari","ios","random","none" options.
 unified-delay: false                # 统一延迟，更换延迟计算方式，去除握手等额外延迟
