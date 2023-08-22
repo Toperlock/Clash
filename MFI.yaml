@@ -150,6 +150,9 @@ proxy-groups:
   - {name: ✈️ 其他节点, <<: *use, filter: "^[^香台美本坡韩]*$"}
 
 rules:
+  - DOMAIN,yacd.metacubex.one,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
   - GEOSITE,category-ads-all,🛑 AdBlock
   - GEOSITE,private,DIRECT
   - GEOIP,private,DIRECT
