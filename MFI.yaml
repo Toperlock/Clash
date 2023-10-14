@@ -30,7 +30,7 @@ i: &i {type: http, behavior: ipcidr, interval: 86400}
 
 # url 里填写自己的订阅,名称不能重复
 # Meta支持机场通用订阅
-# 多个订阅就按照格式再添加一个“provider2”，path路径需不一致，可以写成“tmp2.yaml”
+# 多个订阅就按照格式再添加一个"provider2"，path路径需不一致，可以写成"tmp2.yaml"。上面锚点&auto, &use里也要相应增加"provider2":[provider1, provider2]
 proxy-providers:
   provider1:
     <<: *p
