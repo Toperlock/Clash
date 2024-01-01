@@ -279,6 +279,6 @@ rules:
   - GEOIP,CN,DIRECT
   - MATCH,Final
 
-script:
-  shortcuts:
-    quic: network == 'udp' and dst_port == 443
+#script:
+#  shortcuts:
+#    quic: network == 'udp' and dst_port == 443
