@@ -234,14 +234,14 @@ rules:
     match: https://github.com/Repcz/Tool/raw/X/Egern/Rules/OpenAI.yaml
     policy: OpenAI
 - rule_set:
-    match: https://github.com/Repcz/Tool/raw/X/Egern/Rules/Github.yaml
-    policy: Microsoft
-- rule_set:
     match: https://github.com/Repcz/Tool/raw/X/Egern/Rules/OneDrive.yaml
     policy: Microsoft
 - rule_set:
     match: https://github.com/Repcz/Tool/raw/X/Egern/Rules/Microsoft.yaml
     policy: Microsoft
+- rule_set:
+    match: https://github.com/Repcz/Tool/raw/X/Egern/Rules/Github.yaml
+    policy: Google
 - rule_set:
     match: https://github.com/Repcz/Tool/raw/X/Egern/Rules/YouTube.yaml
     policy: Google
