@@ -21,7 +21,7 @@ dns:
   listen: 0.0.0.0:53                    # DNS监听地址
   default-nameserver: [223.5.5.5, 119.29.29.29]
                                         # 解析非IP的dns用的dns服务器，只支持纯IP，（Meta可为其加密）
-  nameserver: [https://223.5.5.5/dns-query, https://1.12.12.12/dns-query]
+  nameserver: [https://dns.alidns.com/dns-query, https://doh.pub/dns-query]
                                         # 默认DNS服务器，支持udp/tcp/dot/doh/doq
                                         
   fake-ip-range: 198.18.0.1/16          # Fake-IP解析地址池
@@ -38,17 +38,17 @@ dns:
 ######### 锚点 start #########
 
 # 规则行为相关
-c: &c {type: http, behavior: classical, interval: 86400}
+c: &c {type: http, behavior: classical, interval: 86400, format: text}
 
-d: &d {type: http, behavior: domain, interval: 86400}
+d: &d {type: http, behavior: domain, interval: 86400, format: text}
 
-i: &i {type: http, behavior: ipcidr, interval: 86400}
+i: &i {type: http, behavior: ipcidr, interval: 86400, format: text}
 
 # 代理组相关
-g: &g {type: select, proxies: [Proxy, Auto, Fallback, HK香港, TW台湾, SG新加坡, JP日本, US美国, Others, DIRECT]}
+g: &g {type: select, proxies: [Proxy, 自动选择, 故障转移, 香港节点, 台湾节点, 新加坡节点, 日本节点, 美国节点, 其他节点, DIRECT]}
 
 # 远程订阅相关
-p: &p {type: http, interval: 42300, health-check: {enable: true, url: http://www.apple.com/library/test/success.html, interval: 600}}
+p: &p {type: http, interval: 86400, benchmark-timeout: 5, health-check: {enable: true, url: http://www.apple.com/library/test/success.html, interval: 600}}
 
 # 订阅引用相关
 u: &u {type: select, use: [Subscribe]}
@@ -84,221 +84,185 @@ proxy-providers:
 #  - {name:  WARP,type: wireguard,server: 修改为优选IP,port: 端口,ip: 172.16.0.2,public-key: 公钥,private-key: 私钥,mtu: 1280,udp: true}
 
 # 代理组
-proxy-groups:
+proxy-groups: 
 
 # 漏网之鱼
- - {name: Final, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Final.png, <<: *g, proxies: [Proxy,DIRECT]}
+ - {name: Final, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Final.png, <<: *g, proxies: [Proxy,DIRECT]}
 
 # 节点切换
- - {name: Proxy, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Rocket.png, <<: *g, proxies: [Auto,Fallback,HK香港,TW台湾,SG新加坡,JP日本,US美国,Others]}
+ - {name: Proxy, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Rocket.png, <<: *g, proxies: [香港节点,台湾节点,新加坡节点,日本节点,美国节点,其他节点,自动选择,故障转移]}
 
 # 自动选择
- - {name: Auto, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Auto.png, type: url-test, lazy: true, <<: *u}
+ - {name: 自动选择, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Auto.png, type: url-test, lazy: true, <<: *u}
 
 # 故障转移
- - {name: Fallback, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Available.png, type: fallback, <<: *u}
-
-# 国外网站
- - {name: Global, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Global.png, <<: *g}
-
-# 国内网站
- - {name: Mainland, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/China_Map.png, <<: *g, proxies: [DIRECT,Proxy,Auto]}
-
-# 人工智能
- - {name: OpenAI, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Bot.png, <<: *g, proxies: [US美国,JP日本,SG新加坡,TW台湾,Others]}
-
-# 油管视频
- - {name: YouTube, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/YouTube.png, <<: *g}
-
-# 奈飞影视
- - {name: NETFLIX, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Netflix.png, <<: *g}
-
-# 迪士尼+
- - {name: Disney+, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Disney%2B.png, <<: *g}
-
-# Emby
- - {name: Emby, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Emby.png, <<: *g}
-
-# 哔哩哔哩
- - {name: BiliBili, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/bilibili.png, <<: *g, proxies: [DIRECT,HK香港,TW台湾]}
-
-# 声田音乐
- - {name: Spotify, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Spotify.png, <<: *g}
-
-# 海外抖音
- - {name: TikTok, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/TikTok.png, <<: *g}
-
-# 国际媒体
- - {name: Streaming, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Streaming.png, <<: *g}
-
-# 电报信息
- - {name: Telegram, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Telegram_X.png, <<: *g}
-
-# 苹果服务
- - {name: Apple, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Apple.png, <<: *g, proxies: [DIRECT, Proxy, Auto, Fallback, HK香港, TW台湾, SG新加坡, JP日本, US美国, Others]}
+ - {name: 故障转移, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Available.png, type: fallback, <<: *u}
 
 # 谷歌服务
- - {name: Google, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Google.png, <<: *g}
+ - {name: 谷歌服务, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Google_Search.png, <<: *g}
+
+# 哔哩哔哩
+ - {name: 哔哩哔哩, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png, <<: *g, proxies: [DIRECT,香港节点,台湾节点]}
+
+# 国内网站
+ - {name: 国内网站, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/China_Map.png, <<: *g, proxies: [DIRECT,Proxy,自动选择]}
+
+# 国外网站
+ - {name: 国外网站, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Global.png, <<: *g}
+
+# 人工智能
+ - {name: OpenAI, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Bot.png, <<: *g, proxies: [美国节点,日本节点,新加坡节点,台湾节点,其他节点]}
+
+# 油管视频
+ - {name: YouTube, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/YouTube.png, <<: *g}
+
+# TikTok
+ - {name: TikTok, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/TikTok.png, <<: *g}
+
+# 国际媒体
+ - {name: Streaming, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Streaming.png, <<: *g}
+
+# 电报信息
+ - {name: Telegram, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Telegram_X.png, <<: *g}
+
+# Twitter(X)
+ - {name: Twitter, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Twitter.png, <<: *g}
+
+# 苹果服务
+ - {name: Apple, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Apple_1.png, <<: *g, proxies: [DIRECT, Proxy, 自动选择, 故障转移, 香港节点, 台湾节点, 新加坡节点, 日本节点, 美国节点, 其他节点]}
 
 # 微软服务
- - {name: Microsoft, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Microsoft.png, <<: *g, proxies: [DIRECT, Proxy, Auto, Fallback, HK香港, TW台湾, SG新加坡, JP日本, US美国, Others]}
+ - {name: Microsoft, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Windows_11.png, <<: *g}
 
 # 游戏平台
- - {name: Games, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Game.png, <<: *g}
-
-# 网络测试
- - {name: Speedtest, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Speedtest.png, <<: *g, proxies: [Proxy,DIRECT]}
+ - {name: Games, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Game.png, <<: *g}
 
 # 香港节点
- - {name: HK香港, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Hong_Kong.png, <<: *u, filter: "港|🇭🇰|HK|(?i)Hong"}
+ - {name: 香港节点, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png, <<: *u, filter: "港|🇭🇰|HK|(?i)Hong"}
 
 # 台湾节点
- - {name: TW台湾, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/China.png, <<: *u, filter: "台|🇨🇳|🇹🇼|湾|TW|(?i)Taiwan"}
+ - {name: 台湾节点, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/China.png, <<: *u, filter: "台|🇨🇳|🇹🇼|湾|TW|(?i)台湾节点"}
 
 # 狮城节点
- - {name: SG新加坡, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Singapore.png, <<: *u, filter: "新加坡|坡|狮城|🇸🇬|SG|(?i)Singapore"}
+ - {name: 新加坡节点, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Singapore.png, <<: *u, filter: "新加坡|坡|狮城|🇸🇬|SG|(?i)新加坡节点"}
 
 # 日本节点
- - {name: JP日本, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Japan.png, <<: *u, filter: "日|🇯🇵|东京|JP|(?i)Japan"}
+ - {name: 日本节点, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Japan.png, <<: *u, filter: "日|🇯🇵|东京|JP|(?i)日本节点"}
 
 # 美国节点
- - {name: US美国, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/United_States.png, <<: *u, filter: "美|🇺🇲|US|(?i)States|American"}
+ - {name: 美国节点, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/United_States.png, <<: *u, filter: "美|🇺🇲|US|(?i)States|美国节点n"}
 
 # 其他节点
- - {name: Others, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/mini/Airport.png, <<: *u, filter: "^((?!香港|HK|Hong Kong|台湾|TW|TaiWan|新加坡|SG|Singapore|狮城|日本|JP|Japan|美国|US|States|American)).*$"}
+ - {name: 其他节点, icon: https://raw.gitmirror.com/Koolson/Qure/master/IconSet/Color/Airport.png, <<: *u, filter: "^((?!香港|HK|Hong Kong|台湾|TW|台湾节点|新加坡|SG|新加坡节点|狮城|日本|JP|日本节点|美国|US|States|美国节点n)).*$"}
 
 # 远程规则集
 rule-providers:
 
-# 隐私网络
- private-domain: {<<: *d, path: ./ruleset/private-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.yaml}
+# 隐私网络/局域网
+ private-domain: {<<: *d, path: ./ruleset/private-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.list}
  
- private-ip: {<<: *i, path: ./ruleset/private-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.yaml}
-
-# 网络测试
- speedtest-domain: {<<: *d, path: ./ruleset/speedtest-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.yaml}
+ private-ip: {<<: *i, path: ./ruleset/private-ip.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.list}
 
 # 人工智能
- openai-classical: {<<: *c, path: ./ruleset/openai-classical.yaml, url: https://raw.gitmirror.com/Coldvvater/Mononoke/master/Stash/RuleSet/AI.yaml}
+ openai-classical: {<<: *c, path: ./ruleset/openai-classical.list, url: https://raw.gitmirror.com/Coldvvater/Mononoke/master/Stash/RuleSet/AI.list}
 
 # 油管视频
- youtube-domain: {<<: *d, path: ./ruleset/youtube-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.yaml}
-
-# 奈飞影视
- netflix-domain: {<<: *d, path: ./ruleset/netflix-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.yaml}
- 
- netflix-ip: {<<: *i, path: ./ruleset/netflix-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.yaml}
-
-# 迪士尼+
- disney-domain: {<<: *d, path: ./ruleset/disney-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.yaml}
-
-# Emby
- emby-classical: {<<: *c, path: ./ruleset/emby-classical.yaml, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml}
+ youtube-domain: {<<: *d, path: ./ruleset/youtube-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.list}
 
 # 动画疯
- bahamut-domain: {<<: *d, path: ./ruleset/bahamut-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.yaml}
+ bahamut-domain: {<<: *d, path: ./ruleset/bahamut-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.list}
 
 # 哔哩哔哩东南亚
- biliintl-domain: {<<: *d, path: ./ruleset/biliintl-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/biliintl.yaml}
+ biliintl-domain: {<<: *d, path: ./ruleset/biliintl-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/biliintl.list}
 
 # 哔哩哔哩
- bilibili-domain: {<<: *d, path: ./ruleset/bilibili-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.yaml}
+ bilibili-domain: {<<: *d, path: ./ruleset/bilibili-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.list}
  
- bilibili-ip: {<<: *i, path: ./ruleset/bilibili-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/bilibili.yaml}
-
-# 声田音乐
- spotify-domain: {<<: *d, path: ./ruleset/spotify-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.yaml}
+ bilibili-ip: {<<: *i, path: ./ruleset/bilibili-ip.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/bilibili.list}
 
 # 海外抖音
- tiktok-domain: {<<: *d, path: ./ruleset/tiktok-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.yaml}
+ tiktok-domain: {<<: *d, path: ./ruleset/tiktok-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.list}
 
 # 国际媒体
- streamingmedia-classical: {<<: *c, path: ./ruleset/streamingmedia-classical.yaml, url: https://raw.gitmirror.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml}
+ streamingmedia-classical: {<<: *c, path: ./ruleset/streamingmedia-classical.list, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/国外网站Media/国外网站Media.list}
 
 # 电报信息
- telegram-domain: {<<: *d, path: ./ruleset/telegram-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.yaml}
+ telegram-domain: {<<: *d, path: ./ruleset/telegram-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.list}
 
- telegram-ip: {<<: *i, path: ./ruleset/telegram-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.yaml}
+ telegram-ip: {<<: *i, path: ./ruleset/telegram-ip.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.list}
 
 # GitHub
- github-domain: {<<: *d, path: ./ruleset/github-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.yaml}
+ github-domain: {<<: *d, path: ./ruleset/github-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.list}
 
 # Twitter
- twitter-domain: {<<: *d, path: ./ruleset/twitter-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.yaml}
+ twitter-domain: {<<: *d, path: ./ruleset/twitter-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.list}
  
- twitter-ip: {<<: *i, path: ./ruleset/twitter-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.yaml}
+ twitter-ip: {<<: *i, path: ./ruleset/twitter-ip.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.list}
 
-# TestFlight
- testflight-classical: {<<: *c, path: ./ruleset/testflight-classical.yaml, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/TestFlight/TestFlight.yaml}
+# 苹果代理服务
+ apple-classical: {<<: *c, path: ./ruleset/apple-domain.list, url: https://raw.gitmirror.com/Coldvvater/Mononoke/master/Stash/RuleSet/AppleProxyService.list}
 
 # 苹果服务
- apple-domain: {<<: *d, path: ./ruleset/apple-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.yaml}
+ apple-domain: {<<: *d, path: ./ruleset/apple-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.list}
  
- apple-ip: {<<: *i, path: ./ruleset/apple-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.yaml}
+ apple-ip: {<<: *i, path: ./ruleset/apple-ip.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.list}
 
 # 谷歌服务
- google-domain: {<<: *d, path: ./ruleset/google-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.yaml}
+ google-domain: {<<: *d, path: ./ruleset/google-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.list}
 
- google-ip: {<<: *i, path: ./ruleset/google-ip.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.yaml}
+ google-ip: {<<: *i, path: ./ruleset/google-ip.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.list}
 
 # 微软服务
- microsoft-domain: {<<: *d, path: ./ruleset/microsoft-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.yaml}
+ microsoft-domain: {<<: *d, path: ./ruleset/microsoft-domain.list, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.list}
 
 # 游戏平台
- games-classical: {<<: *c, path: ./ruleset/games-classical.yaml, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game_No_Resolve.yaml}
+ games-classical: {<<: *c, path: ./ruleset/games-classical.list, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.list}
 
 # 国内网站
- cn-domain: {<<: *d, path: ./ruleset/cn-domain.yaml, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/China/China_Domain.yaml}
+ cn-domain: {<<: *d, path: ./ruleset/cn-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/cn.list}
 
 # 国外网站
- proxy-domain: {<<: *d, path: ./ruleset/proxy-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.yaml}
+ proxy-domain: {<<: *d, path: ./ruleset/proxy-domain.yaml, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.list}
 
 # 分流规则引用
 rules:
-  #- AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
-  #- SCRIPT,quic,REJECT
+#  - AND,((NETWORK,UDP),(DST-PORT,443)),REJECT
+#  - SCRIPT,quic,REJECT
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.metacubex.one,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
   - DOMAIN,d.metacubex.one,DIRECT
-  - DOMAIN-SUFFIX,gitmirror.com,Global
-  - DOMAIN-SUFFIX,ziffstatic.com,Speedtest
+  - DOMAIN,raw.gitmirror.com,Proxy
 
   - RULE-SET,private-domain,DIRECT
-  - RULE-SET,speedtest-domain,Speedtest
   - RULE-SET,openai-classical,OpenAI
   - RULE-SET,youtube-domain,YouTube
-  - RULE-SET,netflix-domain,NETFLIX
-  - RULE-SET,disney-domain,Disney+
-  - RULE-SET,emby-classical,Emby
-  - RULE-SET,bahamut-domain,TW台湾
+  - RULE-SET,bahamut-domain,台湾节点
   - RULE-SET,biliintl-domain,Streaming
-  - RULE-SET,bilibili-domain,BiliBili
-  - RULE-SET,spotify-domain,Spotify
+  - RULE-SET,bilibili-domain,哔哩哔哩
   - RULE-SET,tiktok-domain,TikTok
   - RULE-SET,streamingmedia-classical,Streaming
   - RULE-SET,telegram-domain,Telegram
-  - RULE-SET,github-domain,Global
-  - RULE-SET,twitter-domain,Global
-  - RULE-SET,testflight-classical,Global
+  - RULE-SET,github-domain,国外网站
+  - RULE-SET,twitter-domain,Twitter
+  - RULE-SET,apple-classical,国外网站
   - RULE-SET,apple-domain,Apple
-  - RULE-SET,google-domain,Google
+  - RULE-SET,google-domain,谷歌服务
   - RULE-SET,microsoft-domain,Microsoft
   - RULE-SET,games-classical,Games
-  - RULE-SET,proxy-domain,Global
+  - RULE-SET,proxy-domain,国外网站
 
-  - RULE-SET,google-ip,Google
-  - RULE-SET,netflix-ip,NETFLIX
+  - RULE-SET,google-ip,谷歌服务
   - RULE-SET,telegram-ip,Telegram
-  - RULE-SET,twitter-ip,Global
-  - RULE-SET,cn-domain,Mainland
-  - RULE-SET,bilibili-ip,BiliBili
+  - RULE-SET,twitter-ip,Twitter
+  - RULE-SET,cn-domain,国内网站
+  - RULE-SET,bilibili-ip,哔哩哔哩
   - RULE-SET,apple-ip,Apple
   - RULE-SET,private-ip,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,Final
 
-#meta内核不支持
+### meta内核不支持
 #script:
 #  shortcuts:
 #    quic: network == 'udp' and dst_port == 443
