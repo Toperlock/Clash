@@ -75,7 +75,7 @@ tun:
 dns:
   enable: true                       # 关闭将使用系统 DNS
   listen: :1053                      # DNS 监听地址
-  ipv6: false                        # IPV6解析开关；如果为false，将返回ipv6结果为空
+  ipv6: true                         # IPV6解析开关；如果为false，将返回ipv6结果为空
   enhanced-mode: fake-ip             # 模式：redir-host或fake-ip
   fake-ip-range: 198.18.0.0/15       # Fake-IP 解析地址池
   fake-ip-filter:                    # Fake-ip 过滤，列表中的域名返回真实IP
