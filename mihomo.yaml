@@ -170,10 +170,10 @@ proxy-groups:
  - {name: X, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/X.png, <<: *Select}
 
 # 苹果服务
- - {name: Apple, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png, <<: *Select}
+ - {name: Apple, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png, <<: *Select, proxies: [DIRECT,HongKong,TaiWan,Japan,Korea,Singapore,America,UnitedKingdom,AllServer,Proxy]}
 
 # 微软服务
- - {name: Microsoft, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Windows_11.png, <<: *Select}
+ - {name: Microsoft, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Windows_11.png, <<: *Select, proxies: [DIRECT,HongKong,TaiWan,Japan,Korea,Singapore,America,UnitedKingdom,AllServer,Proxy]}
 
 # 游戏平台
  - {name: Games, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png, <<: *Select}
