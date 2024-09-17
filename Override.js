@@ -559,7 +559,7 @@ function main(config) {
         behavior: "ipcidr"
       },
       apple_classical: {
-        url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Clash/RuleSet/AppleProxyService.list",
+        url: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Coldvvater/Mononoke/master/Clash/Rules/AppleProxyService.list",
         path: "./ruleset/apple_classical.list",
         behavior: "classical",
         interval: 86400,
