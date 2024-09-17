@@ -2,7 +2,7 @@
 //
 // Clash Verge Rev (Version ≥ 17.2) & Mihomo-Party (Version ≥ 0.5.8)
 //
-// 最后更新时间: 2024-09-08 15:50
+// 最后更新时间: 2024-09-17 16:07
 
 // 规则集通用配置
 const ruleProviderCommon = {
@@ -160,13 +160,13 @@ function main(config) {
         icon: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png",
         name: "Apple",
         type: "select",
-        proxies: ["Proxy", "HongKong", "TaiWan", "Japan", "Korea", "Singapore", "America", "UnitedKingdom", "AllServer", "DIRECT"],
+        proxies: ["DIRECT", "HongKong", "TaiWan", "Japan", "Korea", "Singapore", "America", "UnitedKingdom", "AllServer", "Proxy"],
       },
       {
         icon: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Windows_11.png",
         name: "Microsoft",
         type: "select",
-        proxies: ["Proxy", "HongKong", "TaiWan", "Japan", "Korea", "Singapore", "America", "UnitedKingdom", "AllServer", "DIRECT"],
+        proxies: ["DIRECT", "HongKong", "TaiWan", "Japan", "Korea", "Singapore", "America", "UnitedKingdom", "AllServer", "Proxy"],
       },
       {
         icon: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Game.png",
