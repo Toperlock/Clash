@@ -278,13 +278,13 @@ rule-providers:
  microsoft-domain: {<<: *d, path: ./ruleset/microsoft-domain.mrs, url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs}
 
 # 游戏平台
- games-classical: {<<: *c, path: ./ruleset/games-classical.list, url: https://raw.gitmirror.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.list}
+ games-classical: {<<: *c, path: ./ruleset/games-classical.list, url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.list}
 
 # 国内网站
  cn-domain: {<<: *d, path: ./ruleset/cn-domain.mrs, url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs}
 
 # 国外网站
- geolocation-!cn: {<<: *d, path: ./ruleset/geolocation-!cn.mrs, url: https://raw.gitmirror.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs}
+ geolocation-!cn: {<<: *d, path: ./ruleset/geolocation-!cn.mrs, url:  https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs}
 
 # 分流规则引用
 rules:
