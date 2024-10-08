@@ -284,7 +284,7 @@ rule-providers:
  cn-domain: {<<: *d, path: ./ruleset/cn-domain.mrs, url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs}
 
 # 国外网站
- geolocation-!cn: {<<: *d, path: ./ruleset/geolocation-!cn.mrs, url:  https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs}
+ geolocation-!cn: {<<: *d, path: ./ruleset/geolocation-!cn.mrs, url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs}
 
 # 分流规则引用
 rules:
