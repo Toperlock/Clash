@@ -77,7 +77,7 @@ sniffer:
 
 tun:
   enable: false                      # 启用 tun
-  stack: mixed                      # tun 模式堆栈,可用值：system/gvisor/mixed
+  stack: mixed                       # tun 模式堆栈,可用值：system/gvisor/mixed
   dns-hijack: [any:53]               # dns 劫持，将匹配到的连接导入内部 dns 模块，不书写协议则为 udp://
   auto-route: true                   # 自动设置全局路由，可以自动将全局流量路由进入 tun 网卡               
   auto-detect-interface: true        # 自动选择流量出口接口，多出口网卡同时连接的设备建议手动指定出口网卡
